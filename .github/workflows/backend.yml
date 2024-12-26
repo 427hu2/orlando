@@ -25,6 +25,6 @@ jobs:
 
       - name: Build tests
         run: |
-          ls -1
           cd backend
-          ls -1
+          cmake -S . -B build
+          cd build && cmake --build .
