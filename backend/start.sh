@@ -19,12 +19,12 @@ echo -e "${GREEN}Installing packages...${RESET}"
 echo -e "${GREEN}Packages installed successfully.${RESET}"
 
 # Компиляция проекта
-#echo -e "${GREEN}Building project...${RESET}"
-#cd "$SCRIPT_DIR"
-#cmake -S . -B build || { echo "CMake configuration failed."; exit 1; }
-#cd build && cmake --build . || { echo "Build failed."; exit 1; }
-#echo -e "${GREEN}Build completed successfully.${RESET}"
+echo -e "${GREEN}Building project...${RESET}"
+cd "$SCRIPT_DIR"
+cmake -S . -B build || { echo "CMake configuration failed."; exit 1; }
+cd build && cmake --build . || { echo "Build failed."; exit 1; }
+echo -e "${GREEN}Build completed successfully.${RESET}"
 
 # Запуск приложения
-# echo -e "${GREEN}Running app...${RESET}"
-#"$SCRIPT_DIR/build/orlando" || { echo "Failed to run app."; exit 1; }
+ echo -e "${GREEN}Running app...${RESET}"
+"$SCRIPT_DIR/build/orlando" || { echo "Failed to run app."; exit 1; }
