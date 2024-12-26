@@ -10,21 +10,33 @@ on:
 
 jobs:
   build:
-    name: Build Project
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Make script executable
+      - name: Setup vcpkg
         run: |
           cd backend
-          chmod +x ./start.sh
-          ./start.sh
+          git clone https://github.com/microsoft/vcpkg.git
+          ./vcpkg/bootstrap-vcpkg.sh
 
-      - name: Build tests
+      - name: Install dependencies
         run: |
           cd backend
-          cmake -S . -B build
-          cd build && cmake --build .
+          ./vcpkg/vcpkg install
+
+      - name: Configure CMake
+        run: |
+          cd backend
+          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+
+      - name: Build project
+        run: |
+          cd backend
+          cmake --build build
+
+      - name: Run tests
+        run: |
+          cd backend
+          ctest --test-dir build --output-on-failure
