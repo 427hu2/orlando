@@ -18,7 +18,7 @@ jobs:
       - name: Setup vcpkg
         run: |
           cd backend
-          git clone https://github.com/microsoft/vcpkg.git
+          git clone https://github.com/microsoft/vcpkg.git --depth=1
           ./vcpkg/bootstrap-vcpkg.sh
 
       - name: Install dependencies
