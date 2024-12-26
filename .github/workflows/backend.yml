@@ -17,62 +17,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup dependencies
-        run: |
-          echo "Installing vcpkg..."
-          git clone https://github.com/microsoft/vcpkg.git --depth=1 vcpkg
-          cd vcpkg && ./bootstrap-vcpkg.sh
+      - name: Make script executable
+        run: cd backend && chmod +x ./start.sh
 
-      - name: Install packages
-        run: |
-          echo "Installing packages with vcpkg..."
-          ./vcpkg/vcpkg install
-
-      - name: Build project
-        run: |
-          echo "Building project..."
-          cmake -S . -B build
-          cmake --build build
-
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run tests
-        run: |
-          echo "Running tests..."
-          cd build
-          ctest --output-on-failure
-
-  release:
-    name: Release Project
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Create release
-        run: |
-          echo "Creating release..."
-          # TODO
-
-  deploy:
-    name: Deploy Project
-    runs-on: ubuntu-latest
-    needs: release
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Deploy application
-        run: |
-          echo "Deploying application..."
-          # TODO
+      - name: Run the build script
+        run: ./start.sh
