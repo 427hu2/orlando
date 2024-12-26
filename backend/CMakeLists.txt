@@ -10,9 +10,23 @@ endif()
 
 add_executable(orlando main.cpp)
 
-#enable_testing()
-#
-#find_package(GTest CONFIG REQUIRED)
-#target_link_libraries(orlando PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
-#
-#add_test(AllTestsInMain main)
+# Включение тестов
+enable_testing()
+
+# Поиск GoogleTest
+find_package(GTest CONFIG REQUIRED)
+
+# Сбор тестов
+file(GLOB_RECURSE TEST_SOURCES tests/*.cpp) # Рекурсивно ищем все .cpp файлы в папке tests
+
+# Создаем исполняемый файл для тестов
+add_executable(orlando_tests ${TEST_SOURCES})
+
+# Линкуем тесты с GTest
+target_link_libraries(orlando_tests PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+
+# Устанавливаем путь для включаемых файлов, если это требуется
+target_include_directories(orlando_tests PRIVATE ${CMAKE_SOURCE_DIR}/tests)
+
+# Регистрируем тесты в CTest
+add_test(NAME AllTests COMMAND orlando_tests)
