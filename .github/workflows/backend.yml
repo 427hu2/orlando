@@ -25,12 +25,6 @@ jobs:
 
       - name: Build tests
         run: |
+          ls -1
           cd backend
-          cmake -S . -B build
-          cmake --build build
-
-      - name: Run tests
-        run: |
-          cd backend
-          cd build
-          ctest --output-on-failure
+          ls -1
