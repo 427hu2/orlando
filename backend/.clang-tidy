@@ -1,0 +1,28 @@
+Checks: >
+  -*,  # Отключить все проверки по умолчанию.
+  clang-analyzer-*,       # Глубокий статический анализ.
+  cppcoreguidelines-*,    # Руководства по кодированию на C++.
+  modernize-*,            # Обновление до новых стандартов C++.
+  performance-*,          # Все проверки производительности.
+  readability-*,          # Проверки читаемости.
+  bugprone-*,             # Потенциальные баги.
+  misc-*,                 # Разное (проверки, не попавшие в основные категории).
+  portability-*,          # Кроссплатформенность и переносимость.
+  hicpp-*,                # Строгие рекомендации по качеству кода.
+  abseil-*,               # Рекомендации для проектов, использующих Abseil.
+  llvm-*,                 # Стандарты LLVM.
+  android-cloexec-*       # Безопасность работы с дескрипторами файлов.
+WarningsAsErrors: '*'     # Все предупреждения обрабатываются как ошибки.
+HeaderFilterRegex: '.*'   # Проверять все файлы, включая заголовочные.
+AnalyzeTemporaryDtors: true # Анализ временных объектов.
+CheckOptions:
+  - key:             readability-identifier-naming.ClassCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.FunctionCase
+    value:           camelBack
+  - key:             modernize-use-nullptr.NullMacros
+    value:           'NULL'
+  - key:             cppcoreguidelines-avoid-magic-numbers.IgnoreMacros
+    value:           'false'
+  - key:             cppcoreguidelines-pro-type-member-init.WarnOnMissingBraces
+    value:           'true'
