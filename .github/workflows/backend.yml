@@ -25,10 +25,12 @@ jobs:
 
       - name: Build tests
         run: |
+          cd backend
           cmake -S . -B build
           cmake --build build
 
       - name: Run tests
         run: |
+          cd backend
           cd build
           ctest --output-on-failure
